@@ -1,35 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+export default function App() {
+  const it_tipps = [
+    "Wenn du nicht weißt, was du tun sollst, mach einfach nichts.",
+    "Wer einmal kackt, der kackt auch zweimal.", 
+    "Nachts ist es kälter als draußen."];
+    const [tipp, setTipp] = useState("");
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
+    useEffect(() => {
+      const randomIndex = Math.floor(Math.random() * it_tipps.length);
+      setTipp(it_tipps[randomIndex]);
+    }, []);
+  
+    return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>TailyTip 🦆</h1>
+      <p>{tipp}</p>
+      <div style={{ fontSize: '2rem', marginTop: '1rem' }}>🦆</div>
     </>
-  )
+  );
 }
-
-export default App
