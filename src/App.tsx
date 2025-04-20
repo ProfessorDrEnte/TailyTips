@@ -7,15 +7,31 @@ export default function App() {
     const [tipp, setTipp] = useState("");
 
     useEffect(() => {
-      const randomIndex = Math.floor(Math.random() * it_tipps.length);
-      setTipp(it_tipps[randomIndex]);
+      const savedTipp = localStorage.getItem("tailyTipTipp");
+      if (savedTipp) {
+        setTipp(savedTipp);
+      } else {
+        handleNewTipp(); //fallback
+      }
     }, []);
-  
+
+    function handleNewTipp() {
+      const randomIndex = Math.floor(Math.random() * it_tipps.length);
+      const neuerTipp = it_tipps[randomIndex];
+      setTipp(neuerTipp);
+      localStorage.setItem("tailyTipTipp", neuerTipp);
+    }
+    
+
+
     return (
     <>
       <h1>TailyTip 🦆</h1>
       <p>{tipp}</p>
       <div style={{ fontSize: '2rem', marginTop: '1rem' }}>🦆</div>
+      <button
+        onClick={handleNewTipp}>Neuer Tipp 🧠</button>
+        <div style={{ fontSize: '2rem', marginTop: '1rem' }}></div>
     </>
   );
 }
